@@ -11,13 +11,27 @@ export let splitWord = (word) => {
 }
 
 export let nextLetter = (letter, key) => {
-  return transposeLetter(letter, parseInt(key));
+  for (let i = 0; i < key; i ++) {
+    if (letter === 'z') {
+      letter = 'a'
+    } else if (letter === 'Z') {
+      letter = 'A'
+    } else {
+      letter = String.fromCharCode(letter.charCodeAt(0) + 1);
+    }
+  }
+  return letter;
 }
 
 export let previousLetter = (letter, key) => {
-  return transposeLetter(letter, parseInt(key) * -1);
-}
-
-export let transposeLetter = (letter, key) => {
-  return String.fromCharCode(letter.charCodeAt(0) + key);
+  for (let i = 0; i < key; i ++) {
+    if (letter === 'a') {
+      letter = 'z'
+    } else if (letter === 'A') {
+      letter = 'Z'
+    } else {
+      letter = String.fromCharCode(letter.charCodeAt(0) - 1);
+    }
+  }
+  return letter;
 }

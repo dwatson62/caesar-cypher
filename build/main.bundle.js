@@ -126,15 +126,29 @@ var splitWord = exports.splitWord = function splitWord(word) {
 };
 
 var nextLetter = exports.nextLetter = function nextLetter(letter, key) {
-  return transposeLetter(letter, parseInt(key));
+  for (var i = 0; i < key; i++) {
+    if (letter === 'z') {
+      letter = 'a';
+    } else if (letter === 'Z') {
+      letter = 'A';
+    } else {
+      letter = String.fromCharCode(letter.charCodeAt(0) + 1);
+    }
+  }
+  return letter;
 };
 
 var previousLetter = exports.previousLetter = function previousLetter(letter, key) {
-  return transposeLetter(letter, parseInt(key) * -1);
-};
-
-var transposeLetter = exports.transposeLetter = function transposeLetter(letter, key) {
-  return String.fromCharCode(letter.charCodeAt(0) + key);
+  for (var i = 0; i < key; i++) {
+    if (letter === 'a') {
+      letter = 'z';
+    } else if (letter === 'A') {
+      letter = 'Z';
+    } else {
+      letter = String.fromCharCode(letter.charCodeAt(0) - 1);
+    }
+  }
+  return letter;
 };
 
 /***/ })
