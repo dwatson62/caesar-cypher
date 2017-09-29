@@ -78,13 +78,15 @@ function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj;
 
 document.getElementById('cypherButton').addEventListener('click', function () {
   var word = document.getElementById('word').value;
-  var cypheredWord = caesar.cypher(word);
+  var key = document.getElementById('key').value;
+  var cypheredWord = caesar.cypher(word, key);
   document.getElementById('word').value = cypheredWord;
 });
 
 document.getElementById('decypherButton').addEventListener('click', function () {
   var word = document.getElementById('word').value;
-  var cypheredWord = caesar.decypher(word);
+  var key = document.getElementById('key').value;
+  var cypheredWord = caesar.decypher(word, key);
   document.getElementById('word').value = cypheredWord;
 });
 
@@ -98,30 +100,28 @@ document.getElementById('decypherButton').addEventListener('click', function () 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-var cypher = exports.cypher = function cypher(word) {
+var cypher = exports.cypher = function cypher(word, key) {
   var splitWord = word.split('');
   var cypheredWord = splitWord.map(function (letter) {
-    return nextLetter(letter);
+    return nextLetter(letter, key);
   });
   return cypheredWord.join('');
 };
 
-var decypher = exports.decypher = function decypher(word) {
+var decypher = exports.decypher = function decypher(word, key) {
   var splitWord = word.split('');
   var cypheredWord = splitWord.map(function (letter) {
-    return previousLetter(letter);
+    return previousLetter(letter, key);
   });
   return cypheredWord.join('');
 };
 
-var nextLetter = exports.nextLetter = function nextLetter(letter) {
-  var key = 1;
-  return String.fromCharCode(letter.charCodeAt(0) + key);
+var nextLetter = exports.nextLetter = function nextLetter(letter, key) {
+  return String.fromCharCode(letter.charCodeAt(0) + parseInt(key));
 };
 
-var previousLetter = exports.previousLetter = function previousLetter(letter) {
-  var key = 1;
-  return String.fromCharCode(letter.charCodeAt(0) - key);
+var previousLetter = exports.previousLetter = function previousLetter(letter, key) {
+  return String.fromCharCode(letter.charCodeAt(0) - parseInt(key));
 };
 
 /***/ })

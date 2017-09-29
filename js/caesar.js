@@ -1,21 +1,19 @@
-export let cypher = (word) => {
+export let cypher = (word, key) => {
   let splitWord = word.split('');
-  let cypheredWord = splitWord.map(letter => nextLetter(letter));
+  let cypheredWord = splitWord.map(letter => nextLetter(letter, key));
   return cypheredWord.join('');
 }
 
-export let decypher = (word) => {
+export let decypher = (word, key) => {
   let splitWord = word.split('');
-  let cypheredWord = splitWord.map(letter => previousLetter(letter));
+  let cypheredWord = splitWord.map(letter => previousLetter(letter, key));
   return cypheredWord.join('');
 }
 
-export let nextLetter = (letter) => {
-  const key = 1;
-  return String.fromCharCode(letter.charCodeAt(0) + key);
+export let nextLetter = (letter, key) => {
+  return String.fromCharCode(letter.charCodeAt(0) + parseInt(key));
 }
 
-export let previousLetter = (letter) => {
-  const key = 1;
-  return String.fromCharCode(letter.charCodeAt(0) - key);
+export let previousLetter = (letter, key) => {
+  return String.fromCharCode(letter.charCodeAt(0) - parseInt(key));
 }
