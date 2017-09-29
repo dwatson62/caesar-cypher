@@ -1,7 +1,7 @@
 import * as caesar from './caesar';
 
 document.getElementById('cypherButton').addEventListener('click', () => {
-  let word = document.getElementById('word').innerHTML;
+  let word = document.getElementById('word').value;
   let cypheredWord = caesar.cypher(word);
-  console.log(cypheredWord);
+  document.getElementById('word').value = cypheredWord;
 });
