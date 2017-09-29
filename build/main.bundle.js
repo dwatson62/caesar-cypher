@@ -70,7 +70,40 @@
 "use strict";
 
 
-console.log('hi world');
+var _caesar = __webpack_require__(1);
+
+var caesar = _interopRequireWildcard(_caesar);
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
+
+document.getElementById('cypherButton').addEventListener('click', function () {
+  var word = document.getElementById('word').innerHTML;
+  var cypheredWord = caesar.cypher(word);
+  console.log(cypheredWord);
+});
+
+/***/ }),
+/* 1 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+var cypher = exports.cypher = function cypher(word) {
+  var splitWord = word.split('');
+  var cypheredWord = splitWord.map(function (letter) {
+    return nextLetter(letter);
+  });
+  return cypheredWord.join('');
+};
+
+var nextLetter = exports.nextLetter = function nextLetter(letter) {
+  var key = 1;
+  return String.fromCharCode(letter.charCodeAt(0) + key);
+};
 
 /***/ })
 /******/ ]);
