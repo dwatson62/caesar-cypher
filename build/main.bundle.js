@@ -76,6 +76,15 @@ var caesar = _interopRequireWildcard(_caesar);
 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 
+var select = document.getElementById('key');
+
+for (var i = 1; i < 26; i++) {
+  var opt = document.createElement('option');
+  opt.value = i;
+  opt.innerHTML = i;
+  select.appendChild(opt);
+}
+
 document.getElementById('cypherButton').addEventListener('click', function () {
   var word = document.getElementById('word').value;
   var key = document.getElementById('key').value;
@@ -101,27 +110,31 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 var cypher = exports.cypher = function cypher(word, key) {
-  var splitWord = word.split('');
-  var cypheredWord = splitWord.map(function (letter) {
+  return splitWord(word).map(function (letter) {
     return nextLetter(letter, key);
-  });
-  return cypheredWord.join('');
+  }).join('');
 };
 
 var decypher = exports.decypher = function decypher(word, key) {
-  var splitWord = word.split('');
-  var cypheredWord = splitWord.map(function (letter) {
+  return splitWord(word).map(function (letter) {
     return previousLetter(letter, key);
-  });
-  return cypheredWord.join('');
+  }).join('');
+};
+
+var splitWord = exports.splitWord = function splitWord(word) {
+  return word.split('');
 };
 
 var nextLetter = exports.nextLetter = function nextLetter(letter, key) {
-  return String.fromCharCode(letter.charCodeAt(0) + parseInt(key));
+  return transposeLetter(letter, parseInt(key));
 };
 
 var previousLetter = exports.previousLetter = function previousLetter(letter, key) {
-  return String.fromCharCode(letter.charCodeAt(0) - parseInt(key));
+  return transposeLetter(letter, parseInt(key) * -1);
+};
+
+var transposeLetter = exports.transposeLetter = function transposeLetter(letter, key) {
+  return String.fromCharCode(letter.charCodeAt(0) + key);
 };
 
 /***/ })
