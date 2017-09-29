@@ -82,6 +82,12 @@ document.getElementById('cypherButton').addEventListener('click', function () {
   document.getElementById('word').value = cypheredWord;
 });
 
+document.getElementById('decypherButton').addEventListener('click', function () {
+  var word = document.getElementById('word').value;
+  var cypheredWord = caesar.decypher(word);
+  document.getElementById('word').value = cypheredWord;
+});
+
 /***/ }),
 /* 1 */
 /***/ (function(module, exports, __webpack_require__) {
@@ -100,9 +106,22 @@ var cypher = exports.cypher = function cypher(word) {
   return cypheredWord.join('');
 };
 
+var decypher = exports.decypher = function decypher(word) {
+  var splitWord = word.split('');
+  var cypheredWord = splitWord.map(function (letter) {
+    return previousLetter(letter);
+  });
+  return cypheredWord.join('');
+};
+
 var nextLetter = exports.nextLetter = function nextLetter(letter) {
   var key = 1;
   return String.fromCharCode(letter.charCodeAt(0) + key);
+};
+
+var previousLetter = exports.previousLetter = function previousLetter(letter) {
+  var key = 1;
+  return String.fromCharCode(letter.charCodeAt(0) - key);
 };
 
 /***/ })
